@@ -9,10 +9,8 @@ import seaborn as sns
 print("Libraries loaded successfully")
 
 df = pd.read_csv("superstore.csv")
-# Rename column to something readable
 df = df.rename(columns={"记录数": "Record_Count"})
 
-# Convert to datetime
 df["Order.Date"] = pd.to_datetime(df["Order.Date"])
 df["Ship.Date"] = pd.to_datetime(df["Ship.Date"])
 
@@ -32,8 +30,6 @@ print(df.describe())
 
 print("\nMissing Values:")
 print(df.isnull().sum())
-
-# Sales by Category
 category_sales = df.groupby("Category")["Sales"].sum()
 
 plt.figure(figsize=(8,5))
@@ -45,8 +41,6 @@ plt.ylabel("Total Sales")
 plt.savefig("sales_by_category.png") 
 
 plt.show()
-
-# Profit by Region
 region_profit = df.groupby("Region")["Profit"].sum()
 
 plt.figure(figsize=(8,5))
@@ -58,8 +52,6 @@ plt.ylabel("Total Profit")
 plt.savefig("Profit_by_region.png") 
 
 plt.show()
-
-# Top 10 Products by Sales
 top_products = df.groupby("Product.Name")["Sales"].sum().sort_values(ascending=False).head(10)
 
 plt.figure(figsize=(10,6))
@@ -71,8 +63,6 @@ plt.ylabel("Total Sales")
 plt.savefig("Product_by_Sales.png") 
 
 plt.show()
-
-# Sales by Year
 year_sales = df.groupby("Year")["Sales"].sum()
 
 plt.figure(figsize=(8,5))
@@ -100,3 +90,4 @@ sns.heatmap(pivot, annot=True, fmt=".0f", cmap="coolwarm")
 plt.title("Sales Heatmap by Region and Category")
 plt.savefig("Heatmap_by_region.png") 
 plt.show()
+
